@@ -9,11 +9,13 @@
 			$this->apiKey=empty($apiKey)?$this->apiKey:$apikey;
 			$this->url=empty($url)?$this->url:$url;
 		}
-		public function getJoke(){
-			$data=['page'=>1];
+		public function getJoke($page=1){
+			$data=['page'=>$page];
 			$res=$this->C('get',$data);
 			if($res){
-				return $res;
+				$data=json_decode($res,true);
+				$data=$data['showapi_res_body']['contentlist'];
+				return $data;
 			}else{
 				return $this->error;
 			}
@@ -79,16 +81,21 @@
 
 		}
 	}
-	$error='';
+	$page=2;
+go:	$error='';
 	$joke=new joke();
-	$data=$joke->getJoke();
+	$data=$joke->getJoke($page);
 	$FromName='呵呵';
 	$Subject='笑话数据';
-	$MsgHTML=$data;
+	ob_start();
+	require './joke.html';
+	$MsgHTML=ob_get_clean();
 	$AddAddress='1009928990@qq.com';
 	$res=Mail::send($FromName,$Subject,$MsgHTML,$AddAddress);
 	if(!$res){
 		echo $error;
-		echo $data;
 	}
+	$page++;
+	sleep(60);
+	goto go;
 ?>
