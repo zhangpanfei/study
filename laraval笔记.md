@@ -263,3 +263,53 @@
 	$file->getSize(); //文件大小
 	$file->getClientOriginalName(); //文件上传之前的名字
 	$file->getClientOriginalExtension(); //文件上传之前的后缀名
+
+###会话
+
+	Session::all() // _previous[url] //历史url  所有session
+
+	Session::put('abc','123') //设置abc
+
+	Session::get('abc')  //获取session
+
+	Session::has('abc') //判断session是否存在
+
+	Session::forget('abc') //删除session
+
+	Session::pull('abc') //弹出session 拿出来在删除掉(一次)
+
+	session(array(key=>val)) //函数存储
+
+###session入库
+
+	.env 文件里的 SESSION_DRIVER=file 改成database
+
+	php artisan session:table  //创建session存储表
+
+	composer dump-autoload  //原因不明
+
+	php artisan migrate //原因不明
+
+	完成以上步骤在数据库查看sessions
+
+###数据验证
+
+	$data=Request::all();       //要验证的数据
+	
+	$res=validator::make($data,[
+		'username'=>'required',  //必须
+		'phone'=>'numeric',		//数字
+		'id'=>'numeric|required',  //数字，必填
+		'description'=>'min:12|max:120', // 长度在12-120  (或者 between:12,120)
+		'email'=>'unique:user',   //在user表中唯一
+	]);
+
+	if($res->fails()){          //判断结果
+		return $res->errors();
+	}else{
+		return 'ok';
+	}
+
+
+	
+
