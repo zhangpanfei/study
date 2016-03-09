@@ -311,5 +311,30 @@
 	}
 
 
+###哈希
+
+	Hash::make($password);  //加密
+	Hash::check($password,$rePassword);  //检查    ??查阅hash是怎样加密的
+
+###实用函数
+
+	head($arr);  //数组中的第一个元素值
+
+	array_only($arr,['name','age']);  //返回数组中键名为name和age的元素
+
+	array_first($arr,function($key,$val){
+		return $val>30;
+	});  //返回大于30的元素
+
+	array_add($arr,$key,$val);  //相当于 $arr[$key]=$val;
+
+	array_except($arr,'name'); //返回除了name的元素
+
+	array_flatten($arr);  //返回所有值，不管多少维
 	
+	array_where($arr,function($key,$val){
+		return is_string($val);                 //返回所有字符串
+	});
+	
+	last($arr);   //数组中的最后一个元素值
 
