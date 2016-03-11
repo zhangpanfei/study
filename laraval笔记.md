@@ -316,7 +316,7 @@
 	Hash::make($password);  //加密
 	Hash::check($password,$rePassword);  //检查    ??查阅hash是怎样加密的
 
-###实用函数
+###实用函数 array
 
 	head($arr);  //数组中的第一个元素值
 
@@ -338,3 +338,29 @@
 	
 	last($arr);   //数组中的最后一个元素值
 
+
+###实用函数 path
+
+	app_path();   //项目绝对路径
+
+	config_path();  //项目配置路径
+
+	public_path(); //项目公共文件路径
+
+	storage_path();  //项目日志文件等路径
+
+###实用函数 string
+
+	str_plural();  //单词单数变复数
+
+	start_with('abcd','a'); //判断abcd字符串是否以a开头
+
+	end_with('abcd','d');   //是否以d结尾
+
+	camel_case('hello_word');  //下划线转驼峰   helloWord
+
+	class_basename('App\Controller\Mycontroller');  //在命名空间获取类名
+
+	str_limit('abcd',2);  //限制字符串2位
+
+	str_is(‘模式’,'字符串');  //字符串是否是一个模式  str_is('ab*','abcd'); //是否以ab开头
